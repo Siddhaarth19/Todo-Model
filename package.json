@@ -7,10 +7,19 @@
     "test": "jest",
     "prepare": "husky install"
   },
+  "lint-staged": {
+    "*.js": [
+      "eslint",
+      "prettier --write ."
+    ]
+  },
   "author": "Siddhaarth <siddhaarth.4u@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^8.27.0",
     "husky": "^8.0.2",
-    "jest": "^29.3.1"
+    "jest": "^29.3.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1"
   }
 }

@@ -1,5 +1,5 @@
 const todoList = () => {
-  all = [];
+  let all = [];
   const add = (todoItem) => {
     all.push(todoItem);
   };
@@ -8,15 +8,21 @@ const todoList = () => {
   };
 
   const overdue = () => {
-    return all.filter((item) => item.dueDate < today);
+    return all.filter(
+      (item) => item.dueDate < new Date().toLocaleDateString("en-CA")
+    );
   };
 
   const dueToday = () => {
-    return all.filter((item) => item.dueDate === today);
+    return all.filter(
+      (item) => item.dueDate === new Date().toLocaleDateString("en-CA")
+    );
   };
 
   const dueLater = () => {
-    return all.filter((item) => item.dueDate > today);
+    return all.filter(
+      (item) => item.dueDate > new Date().toLocaleDateString("en-CA")
+    );
   };
 
   const toDisplayableList = (list) => {
@@ -24,7 +30,9 @@ const todoList = () => {
       .map(
         (item) =>
           `${item.completed ? "[x] " : "[ ] "}${item.title} ${
-            item.dueDate === today ? " " : item.dueDate
+            item.dueDate === new Date().toLocaleDateString("en-CA")
+              ? " "
+              : item.dueDate
           }`
       )
       .join("\n");

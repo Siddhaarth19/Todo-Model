@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const todoList = require("../todo");
 
 const { all, markAsComplete, add } = todoList();
@@ -5,7 +6,7 @@ const { all, markAsComplete, add } = todoList();
 describe("Todolist Test Suite", () => {
   beforeAll(() => {
     add({
-      title: "Test todo",
+      title: "new todo",
       completed: false,
       dueDate: new Date().toLocaleDateString("en-CA"),
     });
