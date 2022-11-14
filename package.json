@@ -1,0 +1,16 @@
+{
+  "name": "201-l4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "todo.js",
+  "scripts": {
+    "test": "jest",
+    "prepare": "husky install"
+  },
+  "author": "Siddhaarth <siddhaarth.4u@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^8.0.2",
+    "jest": "^29.3.1"
+  }
+}
