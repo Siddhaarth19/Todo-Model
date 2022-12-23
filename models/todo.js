@@ -1,5 +1,8 @@
 "use strict";
 const { Model } = require("sequelize");
+const sequelize = require("sequelize");
+const Op = sequelize.Op;
+
 module.exports = (sequelize, DataTypes) => {
   class Todo extends Model {
     /**
@@ -45,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
     static async overdue() {
       const date = new Date();
       const todo = await Todo.findAll({
-        where: { dueDate: { [Oper.lt]: date.toLocaleDateString("en-CA") } },
+        where: { dueDate: { [Op.lt]: date.toLocaleDateString("en-CA") } },
         order: [["id"]],
       });
       return todo;
@@ -53,20 +56,20 @@ module.exports = (sequelize, DataTypes) => {
 
     static async dueToday() {
       const date = new Date();
-      const todo = await Todo.findAll({
-        where: { dueDate: { [Oper.eq]: date.toLocaleDateString("en-CA") } },
+      const todo_ = await Todo.findAll({
+        where: { dueDate: { [Op.eq]: date.toLocaleDateString("en-CA") } },
         order: [["id", "ASC"]],
       });
-      return todo;
+      return todo_;
     }
 
     static async dueLater() {
       const date = new Date();
-      const todo = await Todo.findAll({
-        where: { dueDate: { [Oper.gt]: date.toLocaleDateString("en-CA") } },
+      const todo_ = await Todo.findAll({
+        where: { dueDate: { [Op.gt]: date.toLocaleDateString("en-CA") } },
         order: [["id", "ASC"]],
       });
-      return todo;
+      return todo_;
     }
 
     static async markAsComplete(id) {
