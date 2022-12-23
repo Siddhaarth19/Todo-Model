@@ -14,24 +14,32 @@ module.exports = (sequelize, DataTypes) => {
       console.log("My Todo list \n");
 
       console.log("Overdue");
-      const list_before = await this.overdue();
-      list_before.map((item) => {
-        console.log(item.displayableString());
-      });
+      const list_before = await Todo.overdue();
+      console.log(
+        list_before.map((item) => item.displayableString()).join("\n")
+      );
       console.log("\n");
 
       console.log("Due Today");
-      const list_now = await this.dueToday();
-      list_now.map((item) => {
-        console.log(item.displayableString());
-      });
+      const list_now = await Todo.dueToday();
+      console.log(
+        list_now
+          .map((item) => {
+            item.displayableString();
+          })
+          .join("\n")
+      );
       console.log("\n");
 
       console.log("Due Later");
-      const list_next = await this.dueLater();
-      list_next.map((item) => {
-        console.log(item.displayableString());
-      });
+      const list_next = await Todo.dueLater();
+      console.log(
+        list_next
+          .map((item) => {
+            item.displayableString();
+          })
+          .join("\n")
+      );
     }
 
     static async overdue() {
@@ -47,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
       const date = new Date();
       const todo = await Todo.findAll({
         where: { dueDate: { [Oper.eq]: date.toLocaleDateString("en-CA") } },
-        order: [["id"]],
+        order: [["id", "ASC"]],
       });
       return todo;
     }
@@ -56,14 +64,14 @@ module.exports = (sequelize, DataTypes) => {
       const date = new Date();
       const todo = await Todo.findAll({
         where: { dueDate: { [Oper.gt]: date.toLocaleDateString("en-CA") } },
-        order: [["id"]],
+        order: [["id", "ASC"]],
       });
       return todo;
     }
 
     static async markAsComplete(id) {
       try {
-        return Todo.update({ completed: true }, { where: { id: id } });
+        return await Todo.update({ completed: true }, { where: { id: id } });
       } catch (error) {
         console.error(error);
       }
