@@ -29,10 +29,11 @@ const todoList = () => {
     let res = list
       .map(
         (item) =>
-          `${item.completed ? "[x] " : "[ ] "}${item.title} ${
-            item.dueDate === today ? " " : item.dueDate
+          `${item.completed ? "[x]" : "[ ]"} ${item.title} ${
+            item.dueDate === today ? "" : item.dueDate
           }`
       )
+      .trim()
       .join("\n");
     return res;
   };
